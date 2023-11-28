@@ -5,6 +5,8 @@ import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import Home from "./Home";
+import { WalkersView } from "./Walkers/WalkersView";
+import { CitiesView } from "./Cities/CitiesView";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -12,6 +14,12 @@ root.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
+      </Route>
+      <Route path="/walkers" element={<App />}>
+        <Route index element={<WalkersView />} />
+      </Route>
+      <Route path="/cities" element={<App />}>
+        <Route index element={<CitiesView />} />
       </Route>
     </Routes>
   </BrowserRouter>,
