@@ -204,6 +204,8 @@ app.UseHttpsRedirection()
 
 
 //  Generate End Points -----------------------------------------------------------------------------------
+
+// get all dogs---------------
 app.MapGet("/api/dogs", () =>
 {
     return dogs.Select(dog =>
