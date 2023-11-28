@@ -1,6 +1,6 @@
-# DeShawn's Dog Walking 
+# DeShawn's Dog Walking
 
------------ERD------------
+-------------ERD--------------
 Table Dog {
   id int pk
   name varchar
