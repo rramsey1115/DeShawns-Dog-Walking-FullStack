@@ -301,8 +301,7 @@ app.MapGet("/api/cities", () =>
     {
         Id = city.Id,
         Name = city.Name,
-    }
-    );
+    });
 });
 
 // add city -------------------
@@ -320,6 +319,49 @@ app.MapPost("/api/cities/{cityName}", (string cityName) =>
     {
         Id = city.Id,
         Name = city.Name
+    });
+});
+
+// get all walkerCities-------------
+app.MapGet("/api/walkerCities", () =>
+{
+    return walkerCities.Select(wc =>
+    {
+        City city = cities.FirstOrDefault(c => c.Id == wc.CityId);
+        Walker walker = walkers.FirstOrDefault(w => w.Id == wc.WalkerId);
+
+        WalkerCityDTO newWalkerCity = new WalkerCityDTO
+        {
+            Id = wc.Id,
+            WalkerId = wc.WalkerId,
+            Walker = new WalkerDTO
+            {
+                Id = walker.Id,
+                Name = walker.Name,
+                About = walker.About,
+                PicUrl = walker.PicUrl
+            },
+            CityId = wc.CityId,
+            City = new CityDTO
+            {
+                Id = city.Id,
+                Name = city.Name
+            }
+        };
+        return newWalkerCity;
+    });
+});
+
+// get all walkers--------------
+app.MapGet("api/walkers", () =>
+{
+    return walkers.Select(walker =>
+    new WalkerDTO
+    {
+        Id = walker.Id,
+        Name = walker.Name,
+        PicUrl = walker.PicUrl,
+        About = walker.About
     });
 });
 
