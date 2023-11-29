@@ -167,13 +167,13 @@ List<WalkerCity> walkerCities = new List<WalkerCity>(){
     {
         Id = 4,
         WalkerId = 2,
-        CityId = 2
+        CityId = 3
     },
     new()
     {
         Id = 5,
         WalkerId = 3,
-        CityId = 1
+        CityId = 3
     },
     new()
     {
@@ -185,7 +185,7 @@ List<WalkerCity> walkerCities = new List<WalkerCity>(){
     {
         Id = 7,
         WalkerId = 4,
-        CityId = 3
+        CityId = 1
     }
 };
 

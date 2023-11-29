@@ -33,7 +33,7 @@ export const WalkersView = () => {
                 </div>
                 <section className="walkers-list">
                     {allWalkers.map(w => {
-                        return ( <WalkerEntry key={w?.id} walker={w} /> )
+                        return ( <WalkerEntry key={w?.id} walkerObj={w} /> )
                     })}
                 </section>
             </div>
