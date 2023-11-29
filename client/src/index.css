@@ -20,6 +20,12 @@ code {
   padding: 1px 24px;
   margin: 2px;
   cursor: pointer;
+  transition: .2s ease-in-out;
+}
+
+.add-button:hover {
+  background-color: rgb(115, 229, 0);
+  transition: .2s ease-in-out;
 }
 
 .remove-button {
@@ -30,4 +36,10 @@ code {
   padding: 2px 24px;
   margin: 2px;
   cursor: pointer;
+  transition: .2s ease-in-out;
+}
+
+.remove-button:hover {
+  transition: .2s ease-in-out;
+  background-color: rgb(224, 86, 62);
 }

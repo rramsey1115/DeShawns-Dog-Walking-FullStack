@@ -36,6 +36,7 @@
     transition: .2s ease-in-out;
     cursor: pointer;
     text-align: center;
+    box-shadow: 1px 1px 4px 0px gray;
 }
 
 .dog-entry:hover {
