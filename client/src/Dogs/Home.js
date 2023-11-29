@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllDogs } from "../apiManager";
 import { DogEntry } from "./DogEntry.js";
+import "./Dogs.css"
 
 export default function Home() {
 const [allDogs, setAllDogs] = useState([]);
@@ -22,7 +23,7 @@ return (<>
     <div className="dogs-list">
       {allDogs?.map((dog) => {
         return (<DogEntry key={dog.id} currentDog={dog} />)
-      })};
+      })}
     </div>
   </section>
 </>

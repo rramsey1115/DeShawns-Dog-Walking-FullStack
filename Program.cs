@@ -200,7 +200,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-app.UseSwaggerUI();
+    app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
 
@@ -213,15 +213,45 @@ app.UseHttpsRedirection();
 app.MapGet("/api/dogs", () =>
 {
     return dogs.Select(dog =>
-    new DogDTO
     {
-        Id = dog.Id,
-        Name = dog.Name,
-        About = dog.About,
-        CityId = dog.CityId,
-        WalkerId = dog.WalkerId,
-        PicUrl = dog.PicUrl
-    });
+        City city = cities.FirstOrDefault(c => c.Id == dog.CityId);
+        Walker walker = walkers.FirstOrDefault(w => w.Id == dog.WalkerId);
+
+        if (walker == null)
+        {
+            walker = new Walker
+            {
+                Id = 0,
+                Name = " ",
+                About = " ",
+                PicUrl = " ",
+            };
+        };
+
+        DogDTO newDogObj = new DogDTO
+        {
+            Id = dog.Id,
+            Name = dog.Name,
+            About = dog.About,
+            CityId = dog.CityId,
+            City = new CityDTO
+            {
+                Id = city.Id,
+                Name = city.Name
+            },
+            WalkerId = dog.WalkerId,
+            Walker = new WalkerDTO
+            {
+                Id = walker.Id,
+                Name = walker.Name,
+                About = walker.About,
+                PicUrl = walker.PicUrl
+            },
+            PicUrl = dog.PicUrl
+        };
+        return newDogObj;
+    }
+    ).ToList();
 });
 
 
