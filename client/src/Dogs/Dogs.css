@@ -1,9 +1,68 @@
+/* All Dogs List ------------------------ */
 .dogs {
     width: 80vw;
     margin: 10px auto;
 }
 
+.dogs-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.dogs-header {
+    margin: 20px auto;
+    border-bottom: thin solid black;
+    width: 100%;
+    min-width: 330px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Dog entry ----------------------------- */
+.dog-entry {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 27%;
+    min-width: 220px;
+    margin: 10px 4px;
+    padding: 6px 10px;
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: lightgray;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+}
+
+.dog-entry:hover {
+    transition: .2s ease-in-out;
+    color: gray;
+}
+
+.dog-entry:hover > img {
+    transition: .2s ease-in-out;
+    filter:brightness(.9);
+}
+
+.dog-entry-name {
+    width: 80%;
+    margin: 8px;
+    padding: 0;
+}
+
+.dog-entry-city {
+    width: 150px;
+    margin: 0;
+    padding: 0;
+}
+
 .dog-entry-img {
-    width: 80px;
-    border-radius: 50%;
+    width: 80%;
+    min-width: 120px;
+    margin: 6px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px 1px gray;
 }

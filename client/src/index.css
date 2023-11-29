@@ -13,17 +13,21 @@ code {
 }
 
 .add-button {
+  height: 32px;
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: chartreuse;
-  padding: 2px 20px;
-  margin: 4px;
+  padding: 1px 24px;
+  margin: 2px;
+  cursor: pointer;
 }
 
 .remove-button {
+  height: 32px;
   border: 1px solid black;
   border-radius: 5px;
   background-color: tomato;
-  padding: 2px 20px;
-  margin: 4px;
+  padding: 2px 24px;
+  margin: 2px;
+  cursor: pointer;
 }

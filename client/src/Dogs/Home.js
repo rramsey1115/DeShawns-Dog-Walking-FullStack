@@ -18,7 +18,7 @@ return (<>
   <section className="dogs">
     <div className="dogs-header">
       <h1 className="dogs-title">All Dogs</h1>
-      <button className="add-button" id="add-dog-button">Add New Dog</button>
+      <button className="add-button">Add New Dog</button>
     </div>
     <div className="dogs-list">
       {allDogs?.map((dog) => {
