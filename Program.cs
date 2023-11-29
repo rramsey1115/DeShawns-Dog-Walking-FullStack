@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Http.Json;
 
 // collections of data -------------------------------------------------------------------------------------
 List<Dog> dogs = new List<Dog>()
@@ -11,7 +9,7 @@ List<Dog> dogs = new List<Dog>()
         About = "Mr. Zoombo is wild and always has, you guessed it, the ZOOMIES. He needs to be walked while we are away at work to help release some of his energy!",
         CityId = 1,
         WalkerId = 0,
-        PicUrl = "https://images.pexels.com/photos/8895723/pexels-photo-8895723.jpeg?auto=compress&cs=tinysrgb&w=800"
+        PicUrl = "https://images.pexels.com/photos/13581209/pexels-photo-13581209.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     new()
     {
@@ -187,9 +185,6 @@ List<WalkerCity> walkerCities = new List<WalkerCity>(){
     }
 };
 
-
-
-
 // app setup ------------------------------------------------------------------------------------------------
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -203,8 +198,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-
-
 
 
 //  Generate End Points -----------------------------------------------------------------------------------
