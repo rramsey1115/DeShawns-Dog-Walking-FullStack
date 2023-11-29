@@ -37,19 +37,19 @@ export const WalkersView = () => {
                     <h1>Walkers</h1>
                 </div>
                 <div className="walkers-header-right">
-                    <select>
-                        <option value="0">Select a City</option>
+                    <select className="walkers-dropdown">
+                        <option value="0">Filter by City</option>
                         {allCities?.map(city => {
                            return <option key={city.id} value={city.id}>{city.name}</option>
                         })}
                     </select>
                 </div>
-                <section className="walkers-list">
-                    {allWalkers.map(w => {
-                        return ( <WalkerEntry key={w.id} walkerObj={w} /> )
-                    })}
-                </section>
             </div>
+            <section className="walkers-list">
+                {allWalkers.map(w => {
+                    return ( <WalkerEntry key={w.id} walkerObj={w} /> )
+                })}
+            </section>
         </section>
     )
 }

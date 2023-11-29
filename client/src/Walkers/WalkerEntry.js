@@ -27,11 +27,15 @@ export const WalkerEntry = ({walkerObj}) => {
     <div className="walker-entry">
         <img className="walker-entry-img" src={walkerObj?.picUrl} alt="walker" />
         <h4 className="walker-entry-name">{walkerObj?.name}</h4>
-        {filteredCities.map(fcity => {
-            return <h4 key={fcity.id} className="walker-city-name">{fcity.city?.name}</h4>
-        })}
-        <button className="add-button">Assign Dog +</button>
-        <button className="remove-button">Remove Walker -</button>
+        <div className="cities-container">
+            {filteredCities.map(fcity => {
+                return <h4 key={fcity.id} className="walker-city-name">{fcity.city?.name}</h4>
+            })}
+        </div>
+        <div className="buttons-container">
+            <button className="add-button">Assign Dog +</button>
+            <button className="remove-button">Remove Walker -</button>
+        </div>
     </div>
     )
 }
