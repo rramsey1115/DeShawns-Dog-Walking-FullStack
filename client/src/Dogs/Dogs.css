@@ -22,37 +22,31 @@
 /* Dog entry ----------------------------- */
 .dog-entry {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    width: 27%;
-    min-width: 220px;
+    width: 100%;
+    min-width: 330px;
     margin: 10px 4px;
     padding: 6px 10px;
     border: 1px solid black;
     border-radius: 12px;
     background-color: lightgray;
     transition: .2s ease-in-out;
-    cursor: pointer;
     text-align: center;
     box-shadow: 1px 1px 4px 0px gray;
 }
 
-.dog-entry:hover {
-    transition: .2s ease-in-out;
-    color: gray;
-}
-
-.dog-entry:hover > img {
-    transition: .2s ease-in-out;
-    filter:brightness(.9);
-}
-
 .dog-entry-name {
-    width: 80%;
+    width: 200px;
     margin: 8px;
     padding: 0;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.dog-entry-name:hover {
+    transition: .3s ease-in-out;
+    color: chartreuse;
 }
 
 .dog-entry-city {
@@ -62,8 +56,7 @@
 }
 
 .dog-entry-img {
-    width: 80%;
-    min-width: 120px;
+    width: 80px;
     margin: 6px;
     border-radius: 10px;
     box-shadow: 1px 1px 4px 1px gray;
