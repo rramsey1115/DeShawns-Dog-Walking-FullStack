@@ -6,4 +6,5 @@ public class Walker
     public string Name { get; set; }
     public string About { get; set; }
     public string PicUrl { get; set; }
+    public List<City> WalkerCities { get; set; }
 }

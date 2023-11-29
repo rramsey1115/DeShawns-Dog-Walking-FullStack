@@ -356,13 +356,22 @@ app.MapGet("/api/walkerCities", () =>
 app.MapGet("api/walkers", () =>
 {
     return walkers.Select(walker =>
-    new WalkerDTO
     {
-        Id = walker.Id,
-        Name = walker.Name,
-        PicUrl = walker.PicUrl,
-        About = walker.About
-    });
+        List<WalkerCity> walkerCitiesForWalker = walkerCities.Where(wc => wc.WalkerId == 1).ToList();
+
+        List<City> citiesForWalker = walkerCitiesForWalker.Select(wc => cities.First(c => c.Id == wc.CityId)).ToList();
+
+        WalkerDTO walkerDto = new WalkerDTO
+        {
+            Id = walker.Id,
+            Name = walker.Name,
+            PicUrl = walker.PicUrl,
+            About = walker.About,
+            Cities = citiesForWalker
+        };
+        return walkerDto;
+    }
+    ).ToList();
 });
 
 
