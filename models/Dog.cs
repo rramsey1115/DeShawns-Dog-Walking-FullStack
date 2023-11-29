@@ -1,3 +1,6 @@
+namespace DeShawns.Models;
+using DeShawns.Models.DTOs;
+
 public class Dog
 {
     public int Id { get; set; }
