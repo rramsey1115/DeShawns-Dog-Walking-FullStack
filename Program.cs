@@ -252,46 +252,77 @@ app.MapGet("/api/dogs", () =>
 });
 
 // get dog by Id---------------
-app.MapGet("api/dogs/{id}", (int id) => 
+app.MapGet("api/dogs/{id}", (int id) =>
 {
     Dog currentDog = dogs.FirstOrDefault(dog => dog.Id == id);
     City city = cities.FirstOrDefault(c => c.Id == currentDog.CityId);
     Walker walker = walkers.FirstOrDefault(w => w.Id == currentDog.WalkerId);
 
-        if (walker == null)
+    if (walker == null)
+    {
+        walker = new Walker
         {
-            walker = new Walker
-            {
-                Id = 0,
-                Name = " ",
-                About = " ",
-                PicUrl = " ",
-            };
+            Id = 0,
+            Name = " ",
+            About = " ",
+            PicUrl = " ",
         };
+    };
 
-        DogDTO DogObj = new DogDTO
+    DogDTO DogObj = new DogDTO
+    {
+        Id = currentDog.Id,
+        Name = currentDog.Name,
+        About = currentDog.About,
+        CityId = currentDog.CityId,
+        City = new CityDTO
         {
-            Id = currentDog.Id,
-            Name = currentDog.Name,
-            About = currentDog.About,
-            CityId = currentDog.CityId,
-            City = new CityDTO
-            {
-                Id = city.Id,
-                Name = city.Name
-            },
-            WalkerId = currentDog.WalkerId,
-            Walker = new WalkerDTO
-            {
-                Id = walker.Id,
-                Name = walker.Name,
-                About = walker.About,
-                PicUrl = walker.PicUrl
-            },
-            PicUrl = currentDog.PicUrl
-        };
-        return DogObj;
+            Id = city.Id,
+            Name = city.Name
+        },
+        WalkerId = currentDog.WalkerId,
+        Walker = new WalkerDTO
+        {
+            Id = walker.Id,
+            Name = walker.Name,
+            About = walker.About,
+            PicUrl = walker.PicUrl
+        },
+        PicUrl = currentDog.PicUrl
+    };
+    return DogObj;
 });
+
+// get all cities--------------
+app.MapGet("/api/cities", () =>
+{
+    return cities.Select(city =>
+    new CityDTO
+    {
+        Id = city.Id,
+        Name = city.Name,
+    }
+    );
+});
+
+// add city -------------------
+app.MapPost("/api/cities/{cityName}", (string cityName) =>
+{
+    City city = new City()
+    {
+        Id = cities.Max(c => c.Id) + 1,
+        Name = cityName
+    };
+
+    cities.Add(city);
+
+    return Results.Created($"/api/cities/{city.Id}", new CityDTO
+    {
+        Id = city.Id,
+        Name = city.Name
+    });
+});
+
 
 
 app.Run();

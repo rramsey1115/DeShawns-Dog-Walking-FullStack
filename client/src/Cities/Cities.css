@@ -1,0 +1,27 @@
+.cities {
+    width: 80vw;
+    min-width: 360px;
+    margin: 30px auto;
+}
+
+.cities-header {
+    width: 100%;
+    min-width: 330px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.cities-header-left {
+    
+}
+
+.cities-header-right {
+
+}
+
+.cities-list {
+    margin: 30px auto;
+}
