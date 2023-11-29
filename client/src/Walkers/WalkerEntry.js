@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getWalkerCity } from "../apiManager";
+import "./Walkers.css"
 
 export const WalkerEntry = ({walkerObj}) => {
     const [walkerCities, setWalkerCities] = useState([]);
@@ -27,7 +28,7 @@ export const WalkerEntry = ({walkerObj}) => {
         <img className="walker-entry-img" src={walkerObj?.picUrl} alt="walker" />
         <h4 className="walker-entry-name">{walkerObj?.name}</h4>
         {filteredCities.map(fcity => {
-            return <h4 className="walker-city-name">{fcity.city?.name}</h4>
+            return <h4 key={fcity.id} className="walker-city-name">{fcity.city?.name}</h4>
         })}
         <button className="add-button">Assign Dog +</button>
         <button className="remove-button">Remove Walker -</button>

@@ -1,26 +1,34 @@
 import { useEffect, useState } from "react"
 import { WalkerEntry } from "./WalkerEntry";
-import { getAllWalkers, getWalkerCity } from "../apiManager";
+import { getAllCities, getAllWalkers } from "../apiManager";
+import "./Walkers.css"
 
 export const WalkersView = () => {
     const [allWalkers, setAllWalkers] = useState([]);
     const [filteredWalkers, setFilteredWalkers] = useState([]);
     const [filterInput, setFilterInput] = useState("");
+    const [allCities, setAllCities] = useState([]);
 
     const getAndSetAllWalkers = () => {
         getAllWalkers().then(data => setAllWalkers(data))
-    }
+    };
+
+    const getAndSetAllCities = () => {
+        getAllCities().then(data => setAllCities(data));
+    };
 
     const filterWalkers = () => {
         const result = allWalkers.filter(walker => walker.city?.name === filterInput)
         setFilteredWalkers(result)
-    }
+    };
 
     useEffect(()=>{
         getAndSetAllWalkers();
-    },[])
+    },[]);
 
-    console.log('allWalkers', allWalkers);
+    useEffect(()=>{
+        getAndSetAllCities();
+    },[]);
 
     return (
         <section className="walkers">
@@ -29,11 +37,16 @@ export const WalkersView = () => {
                     <h1>Walkers</h1>
                 </div>
                 <div className="walkers-header-right">
-                    <select>Filter By City</select>
+                    <select>
+                        <option value="0">Select a City</option>
+                        {allCities?.map(city => {
+                           return <option key={city.id} value={city.id}>{city.name}</option>
+                        })}
+                    </select>
                 </div>
                 <section className="walkers-list">
                     {allWalkers.map(w => {
-                        return ( <WalkerEntry key={w?.id} walkerObj={w} /> )
+                        return ( <WalkerEntry key={w.id} walkerObj={w} /> )
                     })}
                 </section>
             </div>
