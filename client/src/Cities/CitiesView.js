@@ -20,7 +20,7 @@ export const CitiesView = () => {
     return (
         <section className="cities">
             <div className="cities-header">
-                <div className="cities-header-left"><h1>DeShawn's Current Cities</h1></div>
+                <div className="cities-header-left"><h1>Current Cities</h1></div>
                 <div className="cities-header-right">
                     <input type="text"
                         value={userInput}
@@ -30,11 +30,11 @@ export const CitiesView = () => {
                             let copy = event.target.value;
                             setUserInput(copy);
                     }} />
+                    <button className="add-button" 
+                        id="cities-add-button"
+                        onClick={(e) => handleCityAdd()}
+                        >Add City +</button>
                 </div>
-                <button className="add-button" 
-                    id="cities-add-button"
-                    onClick={(e) => handleCityAdd()}
-                    >Add City +</button>
             </div>
             <div className="cities-list">
                 {cities.map(city => {
