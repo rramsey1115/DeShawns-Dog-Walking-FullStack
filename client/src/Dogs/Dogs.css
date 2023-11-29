@@ -36,6 +36,11 @@
     box-shadow: 1px 1px 4px 0px gray;
 }
 
+a {
+    text-decoration: none;
+    color: none;
+}
+
 .dog-entry-name {
     width: 200px;
     margin: 8px;
@@ -58,6 +63,46 @@
 .dog-entry-img {
     width: 80px;
     margin: 6px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px 1px gray;
+}
+
+/* dog details---------------------------------------------------------- */
+
+.dog-details-header {
+    width: 80vw;
+    margin: 2em auto;
+    text-align: center;
+    margin: 40px auto 10px auto;
+}
+
+.dog-details {
+    width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+}
+
+.dog-details-left {
+    margin: 20px 10px;
+    width: 30vw;
+    min-width: 300px;
+    align-items: center;
+    text-align: center;
+}
+
+.dog-details-right {
+    margin: 20px 10px;
+    width: 30vw;
+    min-width: 300px;
+    text-align: center;
+}
+
+.dog-details-img {
+    width: 50%;
+    min-width: 250px;
     border-radius: 10px;
     box-shadow: 1px 1px 4px 1px gray;
 }

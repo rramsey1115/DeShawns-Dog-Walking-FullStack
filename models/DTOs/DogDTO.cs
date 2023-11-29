@@ -1,3 +1,5 @@
+namespace DeShawns.Models.DTOs;
+
 public class DogDTO
 {
     public int Id { get; set; }

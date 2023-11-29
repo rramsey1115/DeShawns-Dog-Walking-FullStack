@@ -1,3 +1,7 @@
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http.Json;
+using DeShawns.Models;
+using DeShawns.Models.DTOs;
 
 // collections of data -------------------------------------------------------------------------------------
 List<Dog> dogs = new List<Dog>()
@@ -245,6 +249,48 @@ app.MapGet("/api/dogs", () =>
         return newDogObj;
     }
     ).ToList();
+});
+
+// get dog by Id---------------
+app.MapGet("api/dogs/{id}", (int id) => 
+{
+    Dog currentDog = dogs.FirstOrDefault(dog => dog.Id == id);
+    City city = cities.FirstOrDefault(c => c.Id == currentDog.CityId);
+    Walker walker = walkers.FirstOrDefault(w => w.Id == currentDog.WalkerId);
+
+        if (walker == null)
+        {
+            walker = new Walker
+            {
+                Id = 0,
+                Name = " ",
+                About = " ",
+                PicUrl = " ",
+            };
+        };
+
+        DogDTO DogObj = new DogDTO
+        {
+            Id = currentDog.Id,
+            Name = currentDog.Name,
+            About = currentDog.About,
+            CityId = currentDog.CityId,
+            City = new CityDTO
+            {
+                Id = city.Id,
+                Name = city.Name
+            },
+            WalkerId = currentDog.WalkerId,
+            Walker = new WalkerDTO
+            {
+                Id = walker.Id,
+                Name = walker.Name,
+                About = walker.About,
+                PicUrl = walker.PicUrl
+            },
+            PicUrl = currentDog.PicUrl
+        };
+        return DogObj;
 });
 
 
