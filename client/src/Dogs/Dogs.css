@@ -1,0 +1,63 @@
+/* All Dogs List ------------------------ */
+.dogs {
+    width: 80vw;
+    margin: 10px auto;
+}
+
+.dogs-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.dogs-header {
+    margin: 20px auto;
+    border-bottom: thin solid black;
+    width: 100%;
+    min-width: 330px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Dog entry ----------------------------- */
+.dog-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-width: 330px;
+    margin: 10px 4px;
+    padding: 6px 10px;
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: lightgray;
+    transition: .2s ease-in-out;
+    text-align: center;
+    box-shadow: 1px 1px 4px 0px gray;
+}
+
+.dog-entry-name {
+    width: 200px;
+    margin: 8px;
+    padding: 0;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.dog-entry-name:hover {
+    transition: .3s ease-in-out;
+    color: chartreuse;
+}
+
+.dog-entry-city {
+    width: 150px;
+    margin: 0;
+    padding: 0;
+}
+
+.dog-entry-img {
+    width: 80px;
+    margin: 6px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px 1px gray;
+}
