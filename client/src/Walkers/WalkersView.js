@@ -18,8 +18,7 @@ export const WalkersView = () => {
     };
 
     const filterWalkers = () => {
-        const result = allWalkers.filter(walker => walker.city?.name === filterInput)
-        setFilteredWalkers(result)
+   
     };
 
     useEffect(()=>{

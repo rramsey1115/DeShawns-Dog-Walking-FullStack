@@ -357,8 +357,7 @@ app.MapGet("api/walkers", () =>
 {
     return walkers.Select(walker =>
     {
-        List<WalkerCity> walkerCitiesForWalker = walkerCities.Where(wc => wc.WalkerId == 1).ToList();
-
+        List<WalkerCity> walkerCitiesForWalker = walkerCities.Where(wc => wc.WalkerId == walker.Id).ToList();
         List<City> citiesForWalker = walkerCitiesForWalker.Select(wc => cities.First(c => c.Id == wc.CityId)).ToList();
 
         WalkerDTO walkerDto = new WalkerDTO
