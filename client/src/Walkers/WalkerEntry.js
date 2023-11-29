@@ -26,10 +26,10 @@ export const WalkerEntry = ({walkerObj}) => {
     return (
     <div className="walker-entry">
         <img className="walker-entry-img" src={walkerObj?.picUrl} alt="walker" />
-        <h4 className="walker-entry-name">{walkerObj?.name}</h4>
+        <h5 className="walker-entry-name">{walkerObj?.name}</h5>
         <div className="cities-container">
             {filteredCities.map(fcity => {
-                return <h4 key={fcity.id} className="walker-city-name">{fcity.city?.name}</h4>
+                return <h5 key={fcity.id} className="walker-city-name">{fcity.city?.name}</h5>
             })}
         </div>
         <div className="buttons-container">
