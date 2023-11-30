@@ -6,7 +6,7 @@ import "./Walkers.css"
 export const WalkersView = () => {
     const [allWalkers, setAllWalkers] = useState([]);
     const [filteredWalkers, setFilteredWalkers] = useState([]);
-    const [filterInput, setFilterInput] = useState("");
+    const [filterInput, setFilterInput] = useState(0);
     const [allCities, setAllCities] = useState([]);
 
     const getAndSetAllWalkers = () => {
@@ -17,9 +17,9 @@ export const WalkersView = () => {
         getAllCities().then(data => setAllCities(data));
     };
 
-    const filterWalkers = () => {
-   
-    };
+    const handleCityChange = (cityId) => {
+        setFilterInput(cityId * 1)
+    }
 
     useEffect(()=>{
         getAndSetAllWalkers();
@@ -29,6 +29,20 @@ export const WalkersView = () => {
         getAndSetAllCities();
     },[]);
 
+    // checks dropdown input against user Cities arr - only shows users with at least one matching city
+    useEffect(()=>{
+        const result = []
+        for (const walker of allWalkers) {
+            for (const wc of walker.cities) {
+                if (wc.id === filterInput)
+                {
+                    result.push(walker)
+                }
+            }
+        }
+        setFilteredWalkers(result);
+    },[filterInput, allWalkers]);
+
     return (
         <section className="walkers">
             <div className="walkers-header">
@@ -37,8 +51,9 @@ export const WalkersView = () => {
                 </div>
                 <div className="walkers-header-right">
                     <label>Filter by City: {"   "}
-                        <select className="walkers-dropdown">
-                            <option value="0">All</option>
+                        <select className="walkers-dropdown"
+                            onChange={e => handleCityChange(e.target.value)}>
+                            <option value={0}>All</option>
                             {allCities?.map(city => {
                                 return <option key={city.id} value={city.id}>{city.name}</option>
                             })}
@@ -47,9 +62,13 @@ export const WalkersView = () => {
                 </div>
             </div>
             <section className="walkers-list">
-                {allWalkers.map(w => {
+                {/* if filter has been applied, use filteredWalkers, else use allWalkers */}
+                {filteredWalkers.length > 0 ? filteredWalkers.map(w => {
                     return ( <WalkerEntry key={w.id} walkerObj={w} /> )
-                })}
+                }) : allWalkers.map(w => {
+                    return ( <WalkerEntry key={w.id} walkerObj={w} /> )
+                })
+            }
             </section>
         </section>
     )
