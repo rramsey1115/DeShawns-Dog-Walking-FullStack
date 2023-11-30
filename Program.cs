@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Http.Json;
 using DeShawns.Models;
 using DeShawns.Models.DTOs;
 
@@ -397,6 +395,10 @@ app.MapGet("api/walkers/{id}", (int id) => {
     });
 });
 
+
+// edit walker info by id-----------
+
+
 // assign dog to walker------------
 app.MapPut("/api/dogs/{id}", (int id, Dog dog) =>
 {
@@ -415,5 +417,6 @@ app.MapPut("/api/dogs/{id}", (int id, Dog dog) =>
 
     return Results.NoContent();
 });
+
 
 app.Run();
