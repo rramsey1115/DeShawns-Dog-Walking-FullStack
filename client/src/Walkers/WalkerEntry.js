@@ -13,7 +13,7 @@ export const WalkerEntry = ({walkerObj}) => {
             })}
         </div>
         <div className="buttons-container">
-            <button className="add-button">Assign Dog +</button>
+            <Link to={`${walkerObj.id}`}><button className="add-button">Assign Dog +</button></Link>
             <button className="remove-button">Remove Walker -</button>
         </div>
     </div>
