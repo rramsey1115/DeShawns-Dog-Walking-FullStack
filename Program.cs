@@ -373,6 +373,30 @@ app.MapGet("api/walkers", () =>
     ).ToList();
 });
 
+// get walker by Id----------------
+app.MapGet("api/walkers/{id}", (int id) => {
+    
+    // finds matching walker by id provided
+    Walker walker = walkers.FirstOrDefault(w => w.Id == id);
+    if (walker == null)
+    {
+        return Results.NotFound();
+    }
+
+    // finds walkerCity and City data to embed into walker object
+    List<WalkerCity> walkerCitiesForWalker = walkerCities.Where(wc => wc.WalkerId == walker.Id).ToList();
+    List<City> citiesForWalker = walkerCitiesForWalker.Select(wc => cities.First(c => c.Id == wc.CityId)).ToList();
+    
+    // return resulting WalkerDTO to client
+    return Results.Ok(new WalkerDTO{
+        Id = walker.Id,
+        Name = walker.Name,
+        PicUrl = walker.PicUrl,
+        About = walker.About,
+        Cities = citiesForWalker
+    });
+});
+
 
 
 app.Run();

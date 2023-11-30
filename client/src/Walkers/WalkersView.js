@@ -19,7 +19,7 @@ export const WalkersView = () => {
 
     const handleCityChange = (cityId) => {
         setFilterInput(cityId * 1)
-    }
+    };
 
     useEffect(()=>{
         getAndSetAllWalkers();
