@@ -17,40 +17,62 @@ export const EditWalkerForm = ({ walker }) => {
     const findAndSetWalkerCities = () => {
         let res = [];
         walker.cities?.map(wc => res.push(wc));
-        setWalkerCities(res);
-    }
+        setWalkerCities(res)
+    };
 
-    const getAndSetAllCities = () => {
-        getAllCities().then(data => setAllCities(data));
-    }  
+    const getAndSetAllCities = () => {getAllCities().then(data => setAllCities(data))};
 
-    useEffect(()=>{
-        findAndSetWalkerCities();
-    },[walker, updatedWalker]);
+    useEffect(()=> {
+        findAndSetWalkerCities()
+    }, [walker, updatedWalker]);
 
-    useEffect(()=>{
-        getAndSetAllCities();
-    },[walker])
+    useEffect(()=> {
+        getAndSetAllCities()
+    }, [walker]);
 
-    useEffect(()=>{
-        setUpdatedWalker(walker);
-    },[walker])
+    useEffect(()=> {
+        setUpdatedWalker(walker)
+    }, [walker])
 
     return (
     <form className="walker-edit-form">
         <div className="form-div">
             <label>Name: {" "}
-                <input className="walker-edit-name" type="text" defaultValue={walker?.name}/>
+                <input required 
+                onChange={(event) => {
+                    const copy = { ...updatedWalker };
+                    copy.name = event.target.value;
+                    setUpdatedWalker(copy);
+                  }}
+                className="walker-edit-name" 
+                type="text" 
+                defaultValue={walker?.name}/>
             </label>
         </div>
         <div className="form-div">
             <label>Picture URL: {" "}
-                <input className="walker-edit-pic" type="text" defaultValue={walker?.picUrl}/>
+                <input required 
+                onChange={(event) => {
+                    const copy = { ...updatedWalker };
+                    copy.picUrl = event.target.value;
+                    setUpdatedWalker(copy);
+                  }}
+                className="walker-edit-pic" 
+                type="text" 
+                defaultValue={walker?.picUrl}/>
             </label>
         </div>
         <div className="form-div">
             <label>About: {" "}
-                <textarea className="walker-edit-about" type="text" defaultValue={walker?.about}/>
+                <textarea required 
+                onChange={(event) => {
+                    const copy = { ...updatedWalker };
+                    copy.about = event.target.value;
+                    setUpdatedWalker(copy);
+                  }}
+                className="walker-edit-about" 
+                type="text" 
+                defaultValue={walker?.about}/>
             </label>
         </div>
 
@@ -63,7 +85,7 @@ export const EditWalkerForm = ({ walker }) => {
                    match = true;
                 }
             })
-            return (match === false 
+        return (match === false 
                 ? <div className="form-div" key={city.id}>
                     <label>
                         <input type="checkbox" value={city.id}/>{city.name}
@@ -75,26 +97,7 @@ export const EditWalkerForm = ({ walker }) => {
                     </label>
                 </div>
             )
-        })}
+        })
+        }
     </form>)
 }
-
-
-
-/* This is may be a shorter way of doing things, but doesn't work YET...
-{allCities.map(city => {
-            let match = false;
-            walker.cities?.map(wc => {
-                if (city.id === wc.id) 
-                {
-                   match = true;
-                }
-            })
-            return (
-            <div className="form-div" key={city.id}>
-                <label>
-                    <input type="checkbox" defaultChecked={match===true ? true : false} value={city.id}/>{city.name}
-                </label>
-            </div>
-            )
-        })} */
