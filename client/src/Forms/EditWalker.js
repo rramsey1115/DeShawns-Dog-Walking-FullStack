@@ -25,6 +25,5 @@ export const EditWalker = () => {
                 <EditWalkerForm walker={walker} />
             </div>
         </section>
-    
      )
 }
