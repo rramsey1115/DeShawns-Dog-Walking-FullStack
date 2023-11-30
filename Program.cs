@@ -167,13 +167,13 @@ List<WalkerCity> walkerCities = new List<WalkerCity>(){
     {
         Id = 4,
         WalkerId = 2,
-        CityId = 2
+        CityId = 3
     },
     new()
     {
         Id = 5,
         WalkerId = 3,
-        CityId = 1
+        CityId = 3
     },
     new()
     {
@@ -185,7 +185,7 @@ List<WalkerCity> walkerCities = new List<WalkerCity>(){
     {
         Id = 7,
         WalkerId = 4,
-        CityId = 3
+        CityId = 1
     }
 };
 
@@ -301,8 +301,7 @@ app.MapGet("/api/cities", () =>
     {
         Id = city.Id,
         Name = city.Name,
-    }
-    );
+    });
 });
 
 // add city -------------------
@@ -323,6 +322,98 @@ app.MapPost("/api/cities/{cityName}", (string cityName) =>
     });
 });
 
+// get all walkerCities-------------
+app.MapGet("/api/walkerCities", () =>
+{
+    return walkerCities.Select(wc =>
+    {
+        City city = cities.FirstOrDefault(c => c.Id == wc.CityId);
+        Walker walker = walkers.FirstOrDefault(w => w.Id == wc.WalkerId);
 
+        WalkerCityDTO newWalkerCity = new WalkerCityDTO
+        {
+            Id = wc.Id,
+            WalkerId = wc.WalkerId,
+            Walker = new WalkerDTO
+            {
+                Id = walker.Id,
+                Name = walker.Name,
+                About = walker.About,
+                PicUrl = walker.PicUrl
+            },
+            CityId = wc.CityId,
+            City = new CityDTO
+            {
+                Id = city.Id,
+                Name = city.Name
+            }
+        };
+        return newWalkerCity;
+    });
+});
+
+// get all walkers--------------
+app.MapGet("api/walkers", () =>
+{
+    return walkers.Select(walker =>
+    {
+        List<WalkerCity> walkerCitiesForWalker = walkerCities.Where(wc => wc.WalkerId == walker.Id).ToList();
+        List<City> citiesForWalker = walkerCitiesForWalker.Select(wc => cities.First(c => c.Id == wc.CityId)).ToList();
+
+        WalkerDTO walkerDto = new WalkerDTO
+        {
+            Id = walker.Id,
+            Name = walker.Name,
+            PicUrl = walker.PicUrl,
+            About = walker.About,
+            Cities = citiesForWalker
+        };
+        return walkerDto;
+    }
+    ).ToList();
+});
+
+// get walker by Id----------------
+app.MapGet("api/walkers/{id}", (int id) => {
+
+    // finds matching walker by id provided
+    Walker walker = walkers.FirstOrDefault(w => w.Id == id);
+    if (walker == null)
+    {
+        return Results.NotFound();
+    }
+
+    // finds walkerCity and City data to embed into walker object
+    List<WalkerCity> walkerCitiesForWalker = walkerCities.Where(wc => wc.WalkerId == walker.Id).ToList();
+    List<City> citiesForWalker = walkerCitiesForWalker.Select(wc => cities.First(c => c.Id == wc.CityId)).ToList();
+    
+    // return resulting WalkerDTO to client
+    return Results.Ok(new WalkerDTO{
+        Id = walker.Id,
+        Name = walker.Name,
+        PicUrl = walker.PicUrl,
+        About = walker.About,
+        Cities = citiesForWalker
+    });
+});
+
+// assign dog to walker------------
+app.MapPut("/api/dogs/{id}", (int id, Dog dog) =>
+{
+    Dog dogToUpdate = dogs.FirstOrDefault(d => d.Id == id);
+
+    if (dogToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != dog.Id)
+    {
+        return Results.BadRequest();
+    }
+
+    dogToUpdate.WalkerId = dog.WalkerId;
+
+    return Results.NoContent();
+});
 
 app.Run();

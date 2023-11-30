@@ -20,7 +20,7 @@ export const CitiesView = () => {
     return (
         <section className="cities">
             <div className="cities-header">
-                <div className="cities-header-left"><h1>Current Cities</h1></div>
+                <div className="cities-header-left"><h1>Cities</h1></div>
                 <div className="cities-header-right">
                     <input type="text"
                         value={userInput}

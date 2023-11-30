@@ -24,6 +24,7 @@
 /* Dog entry ----------------------------- */
 .dog-entry {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -38,14 +39,20 @@
     box-shadow: 1px 1px 4px 0px gray;
 }
 
+.dog-entry-left {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
 a {
     text-decoration: none;
     color: none;
 }
 
 .dog-entry-name {
-    width: 200px;
-    margin: 8px;
+    width: 150px;
+    margin: 4px;
     padding: 0;
     cursor: pointer;
     transition: .3s ease-in-out;

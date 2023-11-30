@@ -1,0 +1,65 @@
+
+/* walkersView------------------------------------------- */
+.walkers {
+    width: 80vw;
+    min-width: 360px;
+    margin: 30px auto;
+}
+
+.walkers-header {
+    width: 100%;
+    min-width: 330px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.walkers-list {
+    margin: 30px auto;
+}
+
+.walkers-dropdown {
+    padding: 2px 20px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+/* WalkerEntry------------------------------------------------ */
+.walker-entry {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-width: 330px;
+    margin: 10px 4px;
+    padding: 6px 10px;
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: lightgray;
+    transition: .2s ease-in-out;
+    text-align: center;
+    box-shadow: 1px 1px 4px 0px gray;
+}
+
+a {
+    text-decoration: none;
+    color: none;
+}
+
+.walker-entry-img {
+    width: 80px;
+    margin: 6px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px 1px gray;
+}
+
+.walker-entry-name {
+    width: 150px;
+}
+
+.cities-container {
+    width: 150px;
+}
