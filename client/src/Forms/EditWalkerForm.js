@@ -11,20 +11,12 @@ export const EditWalkerForm = ({ walker }) => {
         name: walker.name,
         about: walker.about,
         picUrl:walker.picUrl,
-        cities: walker.cities
+        cities: walkerCities
     });
 
-    const findAndSetWalkerCities = () => {
-        let res = [];
-        walker.cities?.map(wc => res.push(wc));
-        setWalkerCities(res)
+    const getAndSetAllCities = () => {
+        getAllCities().then(data => setAllCities(data))
     };
-
-    const getAndSetAllCities = () => {getAllCities().then(data => setAllCities(data))};
-
-    useEffect(()=> {
-        findAndSetWalkerCities()
-    }, [walker, updatedWalker]);
 
     useEffect(()=> {
         getAndSetAllCities()
@@ -32,7 +24,38 @@ export const EditWalkerForm = ({ walker }) => {
 
     useEffect(()=> {
         setUpdatedWalker(walker)
-    }, [walker])
+    }, [walker]);
+
+    useEffect(()=> {
+        setWalkerCities(walker.cities)
+    }, [walker, updatedWalker]);
+
+
+    const handleCheckChange = (id) => {
+        console.log("changeId", id)
+        console.log('walkerCities', walkerCities);
+
+        // finds if changed box id exists in walkerCities
+        const resultArr = walkerCities.filter(wc => wc.id == id)
+
+        // if array contains city already, delete the city from walkerCities
+        if (resultArr.length > 0)
+        {  
+            const newArr = walkerCities.filter(wc => wc.id != id)
+            setWalkerCities(newArr)
+        }
+        // if array is empty, add the newly checked city
+        else if (resultArr.length === 0)
+        {   
+            const newCity = allCities.filter(city => city.id == id)
+            walkerCities.push(newCity[0]);
+        }
+
+        console.log('walkerCities', walkerCities);
+    }
+    
+
+
 
     return (
     <form className="walker-edit-form">
@@ -87,14 +110,19 @@ export const EditWalkerForm = ({ walker }) => {
             })
         return (match === false 
                 ? <div className="form-div" key={city.id}>
-                    <label>
-                        <input type="checkbox" value={city.id}/>{city.name}
-                    </label>
+                        <input
+                        onClick={(e) => handleCheckChange(e.target.value * 1)}
+                        type="checkbox"
+                        value={city.id}/>
+                        {city.name}
                 </div>
                 : <div className="form-div" key={city.id}>
-                    <label>
-                        <input type="checkbox" defaultChecked value={city.id}/>{city.name}
-                    </label>
+                        <input 
+                        onClick={(e) => handleCheckChange(e.target.value * 1)} 
+                        type="checkbox"
+                        defaultChecked 
+                        value={city.id}/>
+                        {city.name}
                 </div>
             )
         })
