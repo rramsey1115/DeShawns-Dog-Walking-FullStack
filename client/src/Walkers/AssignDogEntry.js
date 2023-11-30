@@ -14,9 +14,6 @@ export const AssignDogEntry = ({aDog, currentWalker}) => {
 
         // navigate to dog details for this dog
         navigate(`/details/${aDog.id}`)
-
-        // just to confirm values while building
-        console.log(`assigned ${aDog.name} to ${currentWalker.name}`);
     }
 
     return (

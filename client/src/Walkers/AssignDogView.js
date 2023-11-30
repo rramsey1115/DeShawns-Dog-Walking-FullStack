@@ -48,7 +48,7 @@ export const AssignDogView = () => {
         <div className="assign-list">
             {/* if no available dogs, present a message, else show available dog entries */}
             {availableDogs.length === 0 
-            ? <h4>No dogs currently available for {walker.name}, please check back at another time!</h4> 
+            ? <h4>No dogs currently available, please check back at another time!</h4> 
             : availableDogs.map(aDog => {return <AssignDogEntry key={aDog.id} aDog={aDog} currentWalker={walker}/>})}
         </div>
     </section>
