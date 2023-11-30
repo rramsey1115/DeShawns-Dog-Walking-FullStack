@@ -23,7 +23,7 @@ export const AssignDogView = () => {
         let res = [];
         walker.cities?.map(c => 
             {
-                res = allDogs.filter(dog => dog.cityId == c.id && dog.walkerId !== walker.id)
+                res = allDogs.filter(dog => dog.cityId == c.id && dog.walkerId === 0)
             })
         setAvailableDogs(res)
     };

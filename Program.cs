@@ -375,7 +375,7 @@ app.MapGet("api/walkers", () =>
 
 // get walker by Id----------------
 app.MapGet("api/walkers/{id}", (int id) => {
-    
+
     // finds matching walker by id provided
     Walker walker = walkers.FirstOrDefault(w => w.Id == id);
     if (walker == null)
@@ -397,6 +397,23 @@ app.MapGet("api/walkers/{id}", (int id) => {
     });
 });
 
+// assign dog to walker------------
+app.MapPut("/api/dogs/{id}", (int id, Dog dog) =>
+{
+    Dog dogToUpdate = dogs.FirstOrDefault(d => d.Id == id);
 
+    if (dogToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != dog.Id)
+    {
+        return Results.BadRequest();
+    }
+
+    dogToUpdate.WalkerId = dog.WalkerId;
+
+    return Results.NoContent();
+});
 
 app.Run();

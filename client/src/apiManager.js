@@ -26,7 +26,6 @@ export const AddCity = async (cityName) => {
     body: JSON.stringify(cityName),
   })
   .then((res) => res.json());
-  console.log('res', res);
   return res
 };
 
@@ -43,4 +42,11 @@ export const getAllWalkers = async () => {
 export const getWalkerById = async (id) => {
   const res = await fetch(`/api/walkers/${id}`);
   return res.json();
+};
+
+export const AssignDogToWalker = async (dogId, updatedDogObj) => {
+  const res = await fetch(`/api/dogs/${dogId}`,{
+  method: "PUT",
+  headers: {"Content-Type":"application/json",},
+  body: JSON.stringify(updatedDogObj)});
 };
