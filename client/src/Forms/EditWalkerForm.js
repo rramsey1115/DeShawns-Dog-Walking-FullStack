@@ -76,9 +76,6 @@ export const EditWalkerForm = ({ walker }) => {
                 </div>
             )
         })}
-
-
-
     </form>)
 }
 
