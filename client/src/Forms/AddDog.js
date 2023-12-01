@@ -101,6 +101,7 @@ export const AddDog = () => {
             </fieldset>
             <fieldset>
                 <button className="add-button" 
+                    id="addD-form-button"
                     type="button"
                     onClick={handleAddDog}
                     >Add Dog +
