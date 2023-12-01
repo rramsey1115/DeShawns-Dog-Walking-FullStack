@@ -17,4 +17,33 @@
 }
 
 /* edit walker form ---------------------- */
+.form-div {
+    padding: 8px 0px;
+}
 
+.walker-edit-name {
+    width: 320px;
+    border: thin solid black;
+    border-radius: 4px;
+}
+
+.walker-edit-pic {
+    width: 320px;
+    border: thin solid black;
+    border-radius: 4px;
+}
+
+.walker-edit-about {
+    width: 320px;
+    border: thin solid black;
+    border-radius: 4px;
+}
+
+#walker-save-button {
+    width: 150px;
+    margin: 12px 0px;
+}
+
+.cities-text {
+    font-size: larger;
+}

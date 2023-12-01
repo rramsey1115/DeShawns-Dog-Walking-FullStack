@@ -1,0 +1,42 @@
+.addD {
+    width: 80vw;
+    min-width: 360px;
+    margin: 10px auto;
+}
+
+.addD-header {
+    margin: 30px auto;
+    border-bottom: 1px solid black;
+    width: 100%;
+    min-width: 330px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.addD-form-item {
+    padding: 8px 0px;
+}
+
+.addD-form-input {
+    width: 300px;
+    border: thin solid black;
+    border-radius: 4px;
+}
+
+.addD-form-textarea {
+    width: 300px;
+    border: thin solid black;
+    border-radius: 4px;
+}
+
+.addD-form-dropdown {
+    width: 300px;
+    border: thin solid black;
+    border-radius: 4px;
+}
+
+#addD-form-button {
+    width: 150px;
+    margin: 12px 0px;
+};

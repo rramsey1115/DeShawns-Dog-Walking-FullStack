@@ -81,7 +81,7 @@ export const EditWalkerForm = ({ walker }) => {
     return (
     <form className="walker-edit-form">
         <div className="form-div">
-            <label>Name: {" "}
+            <label>Name <br/>
                 <input required 
                 onChange={(event) => {
                     const copy = { ...updatedWalker };
@@ -94,7 +94,7 @@ export const EditWalkerForm = ({ walker }) => {
             </label>
         </div>
         <div className="form-div">
-            <label>Picture URL: {" "}
+            <label>Picture URL<br/>
                 <input required 
                 onChange={(event) => {
                     const copy = { ...updatedWalker };
@@ -107,7 +107,7 @@ export const EditWalkerForm = ({ walker }) => {
             </label>
         </div>
         <div className="form-div">
-            <label>About: {" "}
+            <label>About: <br/>
                 <textarea required 
                 onChange={(event) => {
                     const copy = { ...updatedWalker };
@@ -120,10 +120,10 @@ export const EditWalkerForm = ({ walker }) => {
             </label>
         </div>
                   <br/>
-        <h5>Cities:</h5>
+        <p className="cities-text">Cities:</p>
 
         {/* defaultChecks boxes which match the walker's cities */}
-        {allCities.map(city => {
+        {/* {allCities.map(city => {
             let match = false;
             walker.cities?.map(wc => {
                 if (city.id === wc.id) 
@@ -149,9 +149,25 @@ export const EditWalkerForm = ({ walker }) => {
                 </div>
             )
         })
-        }
+        } */}
+
+        {allCities.map(city => {
+            return (
+                <div key={city.id}>
+                <input
+                        onChange={(e) => handleChange(e)}
+                        type="checkbox"
+                        value={city.id}/>
+                        {city.name}
+                        </div>
+            )
+        })}
+
+
+
         <button type="button" 
             className="add-button"
+            id="walker-save-button"
             onClick={(e) => handleSubmit(e)}
             >Save
         </button>
