@@ -204,7 +204,7 @@ app.UseHttpsRedirection();
 
 //  Generate End Points -----------------------------------------------------------------------------------
 
-// get all dogs---------------
+// get all dogs------------------
 app.MapGet("/api/dogs", () =>
 {
     return dogs.Select(dog =>
@@ -249,7 +249,7 @@ app.MapGet("/api/dogs", () =>
     ).ToList();
 });
 
-// get dog by Id---------------
+// get dog by Id------------------
 app.MapGet("api/dogs/{id}", (int id) =>
 {
     Dog currentDog = dogs.FirstOrDefault(dog => dog.Id == id);
@@ -291,7 +291,14 @@ app.MapGet("api/dogs/{id}", (int id) =>
     return DogObj;
 });
 
-// get all cities--------------
+// delete dog by id---------------
+
+
+// add new dog -------------------
+
+
+
+// get all cities-----------------
 app.MapGet("/api/cities", () =>
 {
     return cities.Select(city =>
@@ -302,7 +309,7 @@ app.MapGet("/api/cities", () =>
     });
 });
 
-// add city -------------------
+// add city -----------------------
 app.MapPost("/api/cities/{cityName}", (string cityName) =>
 {
     City city = new City()
@@ -320,7 +327,7 @@ app.MapPost("/api/cities/{cityName}", (string cityName) =>
     });
 });
 
-// get all walkerCities-------------
+// get all walkerCities------------
 app.MapGet("/api/walkerCities", () =>
 {
     return walkerCities.Select(wc =>
@@ -350,7 +357,7 @@ app.MapGet("/api/walkerCities", () =>
     });
 });
 
-// get all walkers--------------
+// get all walkers-----------------
 app.MapGet("/api/walkers", () =>
 {
     return walkers.Select(walker =>
@@ -397,7 +404,6 @@ app.MapGet("/api/walkers/{id}", (int id) =>
     });
 });
 
-
 // edit walker info by id-----------
 app.MapPut("/api/walkers/{id}", (int id, Walker updatedWalker) =>
 {
@@ -414,7 +420,7 @@ app.MapPut("/api/walkers/{id}", (int id, Walker updatedWalker) =>
         newWC.Id = walkersCities.Count > 0 ? walkersCities.Max(wc => wc.Id) + 1 : 1;
         walkersCities.Add(newWC);
     }
-    
+
     walkerCities = walkersCities;
 
     // updates the walker object in the database
