@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react"
-import { getAllCities } from "../apiManager"
+import { useNavigate } from "react-router-dom"
+import { editWalkerById, getAllCities } from "../apiManager"
 import "./EditWalker.css"
 
 export const EditWalkerForm = ({ walker }) => {
@@ -13,8 +14,7 @@ export const EditWalkerForm = ({ walker }) => {
         picUrl: walker.picUrl,
         cities: walker.cities
     });
-
-    // console.log("updatedWalker", updatedWalker);
+    const navigate = useNavigate();
 
     const getAndSetAllCities = () => {
         getAllCities().then(data => setAllCities(data))
@@ -29,8 +29,6 @@ export const EditWalkerForm = ({ walker }) => {
     }, [walker]);
 
     const handleChange = (e) => {
-        console.log('e', e);
-
         const {value, checked} = e.target
        
         if (checked) {
@@ -61,22 +59,22 @@ export const EditWalkerForm = ({ walker }) => {
     const copy = { ...updatedWalker};
     copy.cities = [...res];
     setUpdatedWalker(copy);
-    console.log('res', res);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+
         e.preventDefault();
+
         if (updatedWalker.cities.length === 0)
         {
-            return window.alert("must select at least 1 city!")
+            return window.alert("No empty fields allowed")
         }
         else
         {
-            console.log('updatedWalker', updatedWalker)
+            await editWalkerById(updatedWalker.id, updatedWalker)
+            navigate('/walkers');
         }
     }
-
-    console.log('checkedValues', checkedValues);
 
     console.log('updatedWalker.cities', updatedWalker?.cities);
 

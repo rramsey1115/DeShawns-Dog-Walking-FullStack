@@ -50,3 +50,11 @@ export const AssignDogToWalker = async (dogId, updatedDogObj) => {
   headers: {"Content-Type":"application/json",},
   body: JSON.stringify(updatedDogObj)});
 };
+
+export const editWalkerById = async (walkerId, updatedWalkerObj) => {
+  const res = await fetch(`/api/walkers/${walkerId}`, {
+    method: "PUT",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(updatedWalkerObj)
+  });
+};
