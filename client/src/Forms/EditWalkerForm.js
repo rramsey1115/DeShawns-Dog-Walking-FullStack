@@ -150,6 +150,10 @@ export const EditWalkerForm = ({ walker }) => {
             )
         })
         }
-        <button type="button" onClick={(e) => handleSubmit(e)}>Save</button>
+        <button type="button" 
+            className="add-button"
+            onClick={(e) => handleSubmit(e)}
+            >Save
+        </button>
     </form>)
 }
