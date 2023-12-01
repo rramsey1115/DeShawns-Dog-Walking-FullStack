@@ -250,7 +250,7 @@ app.MapGet("/api/dogs", () =>
 });
 
 // get dog by Id------------------
-app.MapGet("api/dogs/{id}", (int id) =>
+app.MapGet("/api/dogs/{id}", (int id) =>
 {
     Dog currentDog = dogs.FirstOrDefault(dog => dog.Id == id);
     City city = cities.FirstOrDefault(c => c.Id == currentDog.CityId);
@@ -332,7 +332,6 @@ app.MapPost("/api/dogs", (Dog newDogObj) => {
         PicUrl = newDogObj.PicUrl
     });
 });
-
 
 // get all cities-----------------
 app.MapGet("/api/cities", () =>
@@ -476,6 +475,31 @@ app.MapPut("/api/walkers/{id}", (int id, Walker updatedWalker) =>
     walkerToUpdate.About = updatedWalker.About;
     walkerToUpdate.PicUrl = updatedWalker.PicUrl;
     walkerToUpdate.Cities = updatedWalker.Cities;
+
+    return Results.NoContent();
+
+});
+
+// delete walker and associated dog assignments
+app.MapDelete("/api/walkers/{id}", (int id) => {
+    // find matching walker object using id 
+    var walkerToDelete = walkers.FirstOrDefault(w => w.Id == id);
+
+    if (walkerToDelete == null)
+    {
+        return Results.NotFound();
+    }
+
+    // find dogs with matching walkerId & set walkerId to 0 for those dogs
+    foreach(Dog dog in dogs) {
+        if (dog.WalkerId == id)
+        {
+            dog.WalkerId = 0;
+        }
+    }
+
+    // delete walker from database
+    walkers.Remove(walkerToDelete);
 
     return Results.NoContent();
 

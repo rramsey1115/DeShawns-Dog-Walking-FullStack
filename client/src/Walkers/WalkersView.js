@@ -64,9 +64,9 @@ export const WalkersView = () => {
             <section className="walkers-list">
                 {/* if filter has been applied, use filteredWalkers, else use allWalkers */}
                 {filteredWalkers.length > 0 ? filteredWalkers.map(w => {
-                    return ( <WalkerEntry key={w.id} walkerObj={w} /> )
+                    return ( <WalkerEntry key={w.id} walkerObj={w} getAndSetAllWalkers={getAndSetAllWalkers}/> )
                 }) : allWalkers.map(w => {
-                    return ( <WalkerEntry key={w.id} walkerObj={w} /> )
+                    return ( <WalkerEntry key={w.id} walkerObj={w} getAndSetAllWalkers={getAndSetAllWalkers}/> )
                 })
             }
             </section>
