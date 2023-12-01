@@ -122,7 +122,9 @@ export const EditWalkerForm = ({ walker }) => {
                   <br/>
         <p className="cities-text">Cities:</p>
 
-        {/* defaultChecks boxes which match the walker's cities */}
+
+        {/* This is the way I was trying to have default checked boxes, tries for about 5 hours on two different days with no luck....
+        chatGPT just told me to debug after I kept trying new code...rewrote this about 8 times -------------------------------------*/}
         {/* {allCities.map(city => {
             let match = false;
             walker.cities?.map(wc => {
@@ -151,6 +153,7 @@ export const EditWalkerForm = ({ walker }) => {
         })
         } */}
 
+        {/* this is the way I settled on which has no default checked boxes on page load, but works perfectly otherwise */}
         {allCities.map(city => {
             return (
                 <div key={city.id}>
@@ -164,7 +167,7 @@ export const EditWalkerForm = ({ walker }) => {
         })}
 
 
-
+        {/* button for submitting form */}
         <button type="button" 
             className="add-button"
             id="walker-save-button"
