@@ -295,7 +295,40 @@ app.MapGet("api/dogs/{id}", (int id) =>
 
 
 // add new dog -------------------
+app.MapPost("/api/dogs", (Dog newDogObj) => {
 
+    // create new unique Id for newDogObj
+    // SHOULD already have an Id from front end... we will see...
+    // newDogObj.Id = dogs.Max(o => o.Id) + 1;
+
+    // find matching city object based on newDogObj.CityId
+    City dogCity = cities.FirstOrDefault(city => city.Id == newDogObj.CityId);
+
+    // if dog is null cancel request and return error
+    if (dogCity == null)
+    {
+        return Results.BadRequest();
+    }
+
+    // add newDogObj
+    dogs.Add(newDogObj);
+
+    // returns a 201 code with link in the headers where new resource can be accessed
+    return Results.Created($"/details/{newDogObj.Id}", new DogDTO
+    {
+        Id = newDogObj.Id,
+        Name = newDogObj.Name,
+        About = newDogObj.About,
+        CityId = newDogObj.CityId,
+        City = new CityDTO
+        {
+            Id = dogCity.Id,
+            Name = dogCity.Name
+        },
+        WalkerId = 0,
+        PicUrl = newDogObj.PicUrl
+    });
+});
 
 
 // get all cities-----------------

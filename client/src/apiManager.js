@@ -14,6 +14,16 @@ export const getDogById = async (id) => {
   return res.json();
 };
 
+export const CreateNewDog = async (dogObj) => {
+  const res = await fetch(`/api/dogs`, {
+    method:"POST", 
+    headers:{"Content-Type":"application/json",}, 
+    body: JSON.stringify(dogObj),
+  })
+  .then((res) => res.json());
+  return res
+}
+
 export const getAllCities = async () => {
   const res = await fetch("/api/cities");
   return res.json();
