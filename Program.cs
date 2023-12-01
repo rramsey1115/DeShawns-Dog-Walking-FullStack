@@ -351,7 +351,7 @@ app.MapGet("/api/walkerCities", () =>
 });
 
 // get all walkers--------------
-app.MapGet("api/walkers", () =>
+app.MapGet("/api/walkers", () =>
 {
     return walkers.Select(walker =>
     {
@@ -372,7 +372,8 @@ app.MapGet("api/walkers", () =>
 });
 
 // get walker by Id----------------
-app.MapGet("api/walkers/{id}", (int id) => {
+app.MapGet("/api/walkers/{id}", (int id) =>
+{
 
     // finds matching walker by id provided
     Walker walker = walkers.FirstOrDefault(w => w.Id == id);
@@ -384,9 +385,10 @@ app.MapGet("api/walkers/{id}", (int id) => {
     // finds walkerCity and City data to embed into walker object
     List<WalkerCity> walkerCitiesForWalker = walkerCities.Where(wc => wc.WalkerId == walker.Id).ToList();
     List<City> citiesForWalker = walkerCitiesForWalker.Select(wc => cities.First(c => c.Id == wc.CityId)).ToList();
-    
+
     // return resulting WalkerDTO to client
-    return Results.Ok(new WalkerDTO{
+    return Results.Ok(new WalkerDTO
+    {
         Id = walker.Id,
         Name = walker.Name,
         PicUrl = walker.PicUrl,
@@ -397,7 +399,45 @@ app.MapGet("api/walkers/{id}", (int id) => {
 
 
 // edit walker info by id-----------
+app.MapPut("/api/walkers/{id}", (int id, Walker updatedWalker) =>
+{
+    // updates walkerCities in the database
+    var walkersCities = walkerCities.Where(wc => wc.WalkerId != updatedWalker.Id).ToList();
 
+    foreach (City city in updatedWalker.Cities)
+    {
+        WalkerCity newWC = new WalkerCity
+        {
+            WalkerId = updatedWalker.Id,
+            CityId = city.Id,
+        };
+        newWC.Id = walkersCities.Count > 0 ? walkersCities.Max(wc => wc.Id) + 1 : 1;
+        walkersCities.Add(newWC);
+    }
+    
+    walkerCities = walkersCities;
+
+    // updates the walker object in the database
+    Walker walkerToUpdate = walkers.FirstOrDefault(wtu => wtu.Id == id);
+
+    if (walkerToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != updatedWalker.Id)
+    {
+        return Results.BadRequest();
+    }
+
+    walkerToUpdate.Id = updatedWalker.Id;
+    walkerToUpdate.Name = updatedWalker.Name;
+    walkerToUpdate.About = updatedWalker.About;
+    walkerToUpdate.PicUrl = updatedWalker.PicUrl;
+    walkerToUpdate.Cities = updatedWalker.Cities;
+
+    return Results.NoContent();
+
+});
 
 // assign dog to walker------------
 app.MapPut("/api/dogs/{id}", (int id, Dog dog) =>
