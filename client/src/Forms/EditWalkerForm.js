@@ -5,14 +5,16 @@ import "./EditWalker.css"
 
 export const EditWalkerForm = ({ walker }) => {
     const [allCities, setAllCities] = useState([]);
-    const [walkerCities, setWalkerCities] = useState([]);
+    const [checkedValues, setCheckedValues] = useState([]);
     const [updatedWalker, setUpdatedWalker] = useState({
         id: walker.id,
         name: walker.name,
         about: walker.about,
-        picUrl:walker.picUrl,
-        cities: walkerCities
+        picUrl: walker.picUrl,
+        cities: walker.cities
     });
+
+    // console.log("updatedWalker", updatedWalker);
 
     const getAndSetAllCities = () => {
         getAllCities().then(data => setAllCities(data))
@@ -23,39 +25,60 @@ export const EditWalkerForm = ({ walker }) => {
     }, [walker]);
 
     useEffect(()=> {
-        setUpdatedWalker(walker)
+        setUpdatedWalker({...walker})
     }, [walker]);
 
-    useEffect(()=> {
-        setWalkerCities(walker.cities)
-    }, [walker, updatedWalker]);
+    const handleChange = (e) => {
+        console.log('e', e);
 
-
-    const handleCheckChange = (id) => {
-        console.log("changeId", id)
-        console.log('walkerCities', walkerCities);
-
-        // finds if changed box id exists in walkerCities
-        const resultArr = walkerCities.filter(wc => wc.id == id)
-
-        // if array contains city already, delete the city from walkerCities
-        if (resultArr.length > 0)
-        {  
-            const newArr = walkerCities.filter(wc => wc.id != id)
-            setWalkerCities(newArr)
+        const {value, checked} = e.target
+       
+        if (checked) {
+            setCheckedValues(pre => [...pre, value])
         }
-        // if array is empty, add the newly checked city
-        else if (resultArr.length === 0)
-        {   
-            const newCity = allCities.filter(city => city.id == id)
-            walkerCities.push(newCity[0]);
+        else {
+            setCheckedValues(pre => {
+                return [...pre.filter(id => id !== value)]
+            })
         }
-
-        console.log('walkerCities', walkerCities);
+        updateWalkerCities();
     }
-    
 
+    useEffect(() => {
+        updateWalkerCities();
+    }, [checkedValues])
 
+    // updates updatedWalker to match checked boxes
+    const updateWalkerCities = () => {
+        let res = [];
+        allCities.map(c => {
+            checkedValues.map(cv => {
+                if (cv == c.id){
+                    res.push(c);
+                }
+            })
+        })
+    const copy = { ...updatedWalker};
+    copy.cities = [...res];
+    setUpdatedWalker(copy);
+    console.log('res', res);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (updatedWalker.cities.length === 0)
+        {
+            return window.alert("must select at least 1 city!")
+        }
+        else
+        {
+            console.log('updatedWalker', updatedWalker)
+        }
+    }
+
+    console.log('checkedValues', checkedValues);
+
+    console.log('updatedWalker.cities', updatedWalker?.cities);
 
     return (
     <form className="walker-edit-form">
@@ -98,11 +121,13 @@ export const EditWalkerForm = ({ walker }) => {
                 defaultValue={walker?.about}/>
             </label>
         </div>
+                  <br/>
+        <h5>Cities:</h5>
 
         {/* defaultChecks boxes which match the walker's cities */}
         {allCities.map(city => {
             let match = false;
-            walkerCities?.map(wc => {
+            walker.cities?.map(wc => {
                 if (city.id === wc.id) 
                 {
                    match = true;
@@ -111,21 +136,22 @@ export const EditWalkerForm = ({ walker }) => {
         return (match === false 
                 ? <div className="form-div" key={city.id}>
                         <input
-                        onClick={(e) => handleCheckChange(e.target.value * 1)}
+                        onChange={(e) => handleChange(e)}
                         type="checkbox"
                         value={city.id}/>
                         {city.name}
                 </div>
                 : <div className="form-div" key={city.id}>
                         <input 
-                        onClick={(e) => handleCheckChange(e.target.value * 1)} 
+                        onChange={(e) => handleChange(e)} 
                         type="checkbox"
-                        defaultChecked 
+                        // defaultChecked
                         value={city.id}/>
                         {city.name}
                 </div>
             )
         })
         }
+        <button type="button" onClick={(e) => handleSubmit(e)}>Save</button>
     </form>)
 }
