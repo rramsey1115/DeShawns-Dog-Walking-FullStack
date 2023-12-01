@@ -58,6 +58,10 @@ export const getWalkerById = async (id) => {
   return res.json();
 };
 
+export const RemoveWalkerById = async (walkerId) => {
+  return fetch(`/api/walkers/${walkerId}`, { method: "DELETE" });
+}
+
 export const AssignDogToWalker = async (dogId, updatedDogObj) => {
   const res = await fetch(`/api/dogs/${dogId}`,{
   method: "PUT",

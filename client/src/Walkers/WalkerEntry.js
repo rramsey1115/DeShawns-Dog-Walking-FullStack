@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom"
 import "./Walkers.css"
+import { RemoveWalkerById } from "../apiManager"
 
-export const WalkerEntry = ({walkerObj}) => {
+export const WalkerEntry = ({walkerObj, getAndSetAllWalkers}) => {
+
+    const handleRemoveWalker = async () => {
+       await RemoveWalkerById(walkerObj.id);
+       getAndSetAllWalkers();
+    }
 
     return (
     <div className="walker-entry">
@@ -14,7 +20,9 @@ export const WalkerEntry = ({walkerObj}) => {
         </div>
         <div className="buttons-container">
             <Link to={`${walkerObj.id}`}><button className="add-button">Assign Dog +</button></Link>
-            <button className="remove-button">Remove Walker -</button>
+            <button 
+                className="remove-button"
+                onClick={handleRemoveWalker}>Remove Walker -</button>
         </div>
     </div>
     )
