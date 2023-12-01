@@ -22,6 +22,10 @@ export const CreateNewDog = async (dogObj) => {
   })
   .then((res) => res.json());
   return res
+};
+
+export const RemoveDogById = async (dogId) => {
+  return fetch(`/api/dogs/${dogId}`, { method: "DELETE" });
 }
 
 export const getAllCities = async () => {

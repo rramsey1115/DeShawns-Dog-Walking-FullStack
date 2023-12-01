@@ -292,7 +292,10 @@ app.MapGet("api/dogs/{id}", (int id) =>
 });
 
 // delete dog by id---------------
-
+app.MapDelete("/api/dogs/{id}", (int id) => {
+    Dog deleteDog = dogs.FirstOrDefault(d => d.Id == id);
+    dogs.Remove(deleteDog);
+});
 
 // add new dog -------------------
 app.MapPost("/api/dogs", (Dog newDogObj) => {

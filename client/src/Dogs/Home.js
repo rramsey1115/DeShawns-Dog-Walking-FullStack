@@ -23,7 +23,7 @@ return (<>
     </div>
     <div className="dogs-list">
       {allDogs?.map((dog) => {
-        return (<DogEntry key={dog.id} currentDog={dog} />)
+        return (<DogEntry key={dog.id} currentDog={dog} getAndSetAllDogs={getAndSetAllDogs}/>)
       })}
     </div>
   </section>
