@@ -5,8 +5,9 @@ import { editWalkerById, getAllCities } from "../apiManager"
 import "./EditWalker.css"
 
 export const EditWalkerForm = ({ walker }) => {
+    // console.log('walker', walker)
     const [allCities, setAllCities] = useState([]);
-    const [checkedValues, setCheckedValues] = useState([]);
+    const [checkedValues, setCheckedValues] = useState(walker.cities.map(wc => wc.id));
     const [updatedWalker, setUpdatedWalker] = useState({
         id: walker.id,
         name: walker.name,
@@ -14,6 +15,7 @@ export const EditWalkerForm = ({ walker }) => {
         picUrl: walker.picUrl,
         cities: walker.cities
     });
+
     const navigate = useNavigate();
 
     const getAndSetAllCities = () => {
@@ -22,43 +24,62 @@ export const EditWalkerForm = ({ walker }) => {
 
     useEffect(()=> {
         getAndSetAllCities()
-    }, [walker]);
-
-    useEffect(()=> {
-        setUpdatedWalker({...walker})
-    }, [walker]);
-
-    const handleChange = (e) => {
-        const {value, checked} = e.target
-       
-        if (checked) {
-            setCheckedValues(pre => [...pre, value])
-        }
-        else {
-            setCheckedValues(pre => {
-                return [...pre.filter(id => id !== value)]
-            })
-        }
-        updateWalkerCities();
-    }
+        // console.log('copy walker', {...walker})
+        // setUpdatedWalker({...walker})
+        // console.log('updatedWalker', updatedWalker);
+        // if (walker.id)
+        // {
+        //     setCheckedValues(walker.cities.map(wc => wc.id))
+        // } 
+    }, []);
 
     useEffect(() => {
         updateWalkerCities();
-    }, [checkedValues])
+    }, [allCities, checkedValues])
+
+    useEffect(() => {}, [])
+    
+    const handleChange = (e) => {
+
+        const {value, checked} = e.target
+
+       console.log('checked', checked)
+        if (checked) {
+            console.log('if')
+            setCheckedValues(pre => [...pre, value * 1])
+            // updateWalkerCities();
+        }
+        else 
+        {
+            // THIS IS THE PROBLEM I THINK
+            // console.log('value', value);
+            setCheckedValues(pre => {
+                console.log('preELSE', pre)
+                console.log('valueELSE', value);
+                // console.log('pre', pre);
+                console.log([...pre.filter(id => id !== value * 1)])
+                return [...pre.filter(id => id !== value * 1)]
+            })
+            // updateWalkerCities();
+        }
+    }
 
     // updates updatedWalker to match checked boxes
     const updateWalkerCities = () => {
+        console.log('checkedValues', checkedValues)
         let res = [];
         allCities.map(c => {
-            checkedValues.map(cv => {
-                if (cv == c.id){
+            for(let value of checkedValues) {
+                if (value === c.id){
                     res.push(c);
                 }
-            })
+            }
         })
-    const copy = { ...updatedWalker};
-    copy.cities = [...res];
-    setUpdatedWalker(copy);
+            const copy = { ...updatedWalker};
+            console.log('res', res);
+            copy.cities = [...res];
+            // console.log('copy',copy)
+            setUpdatedWalker(copy);
     }
 
     const handleSubmit = async (e) => {
@@ -76,10 +97,14 @@ export const EditWalkerForm = ({ walker }) => {
         }
     }
 
-    console.log('updatedWalker.cities', updatedWalker?.cities);
+    // console.log('updatedWalker.cities', updatedWalker?.cities);
+    // console.log('cvs', checkedValues);
 
+  
+        // console.log('uwELSE', updatedWalker)
     return (
-    <form className="walker-edit-form">
+        <form className="walker-edit-form">
+        {/* {console.log('updatedWalker', updatedWalker)} */}
         <div className="form-div">
             <label>Name <br/>
                 <input required 
@@ -123,35 +148,6 @@ export const EditWalkerForm = ({ walker }) => {
         <p className="cities-text">Cities:</p>
 
 
-        {/* This is the way I was trying to have default checked boxes, tries for about 5 hours on two different days with no luck....
-        chatGPT just told me to debug after I kept trying new code...rewrote this about 8 times -------------------------------------*/}
-        {/* {allCities.map(city => {
-            let match = false;
-            walker.cities?.map(wc => {
-                if (city.id === wc.id) 
-                {
-                   match = true;
-                }
-            })
-        return (match === false 
-                ? <div className="form-div" key={city.id}>
-                        <input
-                        onChange={(e) => handleChange(e)}
-                        type="checkbox"
-                        value={city.id}/>
-                        {city.name}
-                </div>
-                : <div className="form-div" key={city.id}>
-                        <input 
-                        onChange={(e) => handleChange(e)} 
-                        type="checkbox"
-                        // defaultChecked
-                        value={city.id}/>
-                        {city.name}
-                </div>
-            )
-        })
-        } */}
 
         {/* this is the way I settled on which has no default checked boxes on page load, but works perfectly otherwise */}
         {allCities.map(city => {
@@ -159,13 +155,13 @@ export const EditWalkerForm = ({ walker }) => {
                 <div key={city.id}>
                 <input
                         onChange={(e) => handleChange(e)}
+                        checked={updatedWalker.cities.some(wc => wc.id === city.id)}
                         type="checkbox"
                         value={city.id}/>
                         {city.name}
-                        </div>
+                </div>
             )
         })}
-
 
         {/* button for submitting form */}
         <button type="button" 
@@ -175,4 +171,38 @@ export const EditWalkerForm = ({ walker }) => {
             >Save
         </button>
     </form>)
-}
+    }
+
+
+
+
+
+{/* This is the way I was trying to have default checked boxes, tries for about 5 hours on two different days with no luck....
+chatGPT just told me to debug after I kept trying new code...rewrote this about 8 times -------------------------------------*/}
+{/* {allCities.map(city => {
+    let match = false;
+    walker.cities?.map(wc => {
+        if (city.id === wc.id) 
+        {
+           match = true;
+        }
+    })
+return (match === false 
+        ? <div className="form-div" key={city.id}>
+                <input
+                onChange={(e) => handleChange(e)}
+                type="checkbox"
+                value={city.id}/>
+                {city.name}
+        </div>
+        : <div className="form-div" key={city.id}>
+                <input 
+                onChange={(e) => handleChange(e)} 
+                type="checkbox"
+                // defaultChecked
+                value={city.id}/>
+                {city.name}
+        </div>
+    )
+})
+} */}
