@@ -16,14 +16,22 @@ export const EditWalker = () => {
         getAndSetWalker();
     }, [wId])
 
-    return ( 
-        <section className="edit">
-            <div className="edit-header">
-                <h1>Edit {walker.name}'s Info</h1>
-            </div>
-            <div className="form-container">
-                <EditWalkerForm walker={walker} />
-            </div>
-        </section>
-     )
+
+    if(!walker.id)
+    {
+        return null;
+    }
+    else 
+    {
+        return ( 
+            <section className="edit">
+                <div className="edit-header">
+                    <h1>Edit {walker.name}'s Info</h1>
+                </div>
+                <div className="form-container">
+                    <EditWalkerForm walker={walker} /> 
+                </div>
+            </section>
+         )
+    }
 }
