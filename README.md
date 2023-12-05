@@ -18,3 +18,7 @@ The user is able to:
 - essentially functioning as an admin for the business site
 
 This project was a great stepping stone in my coding journey to being a full-stack developer, the next step is to build a full-stack application using requests to SQL which I cannot wait to learn about!
+
+
+Project ERD: https://dbdiagram.io/d/TuberTreats-656a475756d8064ca038fc4e
+
