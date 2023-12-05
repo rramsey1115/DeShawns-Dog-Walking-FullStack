@@ -8,6 +8,13 @@ I became much more familiar with github project boards, tickets, and checking ou
 
 DeShawn's Dogwalking is an application designed for dog owners who need a hired walker to take their fur baby for walks during the day or while they are out of town.
 
-For this project, the user is able to add dogs, see which walkers are available in each city, as well as dogs which need walkers in that city. The user is then able to assign dogs to walkers. The user is also albe to update and delete walkers, essentially functioning as an admin might. 
+The user is able to:
+- add dogs
+- remove dogs
+- see which walkers are available in each city by filtering results
+- see dogs which need walkers in that city
+- assign dogs to walkers
+- update and delete walkers,
+- essentially functioning as an admin for the business site
 
 This project was a great stepping stone in my coding journey to being a full-stack developer, the next step is to build a full-stack application using requests to SQL which I cannot wait to learn about!
