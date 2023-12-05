@@ -1,35 +1,9 @@
-# DeShawn's Dog Walking
+This is a project for my server-side curriculum at Nashville Software School. 
 
--------------ERD--------------
-Table Dog {
-  id int pk
-  name varchar
-  about varchar
-  cityId int
-  walkerId int
-  picUrl varchar
-}
+This is the first time I have used my client-side skills, React, JS, CSS, HTML, and COMBINED them with my new skills in server-side using C# endpoints. 
 
-Table Walker {
-  id int pk
-  name varchar
-  about varchar
-  picUrl varchar
-}
+DeShawn's Dogwalking is an application designed for dog owners who need a hired walker to take their fur baby for walks during the day or while they are out of town.
 
-Table WalkerCity {
-  id int pk
-  walkerId int
-  cityId int
-}
+For this project, the user is able to add dogs, see which walkers are available in each city, as well as dogs which need walkers in that city. The user is then able to assign dogs to walkers. The user is also albe to update and delete walkers, essentially functioning as an admin might. 
 
-Table City {
-  id int pk
-  name varchar
-  picUrl varchar
-}
-
-Ref: "Dog"."cityId" > "City"."id"
-Ref: "Walker"."id" < "WalkerCity"."walkerId"
-Ref: "City"."id" < "WalkerCity"."cityId"
-Ref: "Walker"."id" < "Dog"."walkerId"
+This project was a great stepping stone in my coding journey to being a full-stack developer, the next step is to build a full-stack application using requests to SQL which I cannot wait to learn about!
