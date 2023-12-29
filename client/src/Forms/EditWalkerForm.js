@@ -43,10 +43,6 @@ export const EditWalkerForm = ({ walker }) => {
         else 
         {
             setCheckedValues(pre => {
-                console.log('preELSE', pre)
-                console.log('valueELSE', value);
-                // console.log('pre', pre);
-                console.log([...pre.filter(id => id !== value * 1)])
                 return [...pre.filter(id => id !== value * 1)]
             })
         }
@@ -128,9 +124,6 @@ export const EditWalkerForm = ({ walker }) => {
                   <br/>
         <p className="cities-text">Cities:</p>
 
-
-
-        {/* this is the way I settled on which has no default checked boxes on page load, but works perfectly otherwise */}
         {allCities.map(city => {
             return (
                 <div key={city.id}>
@@ -144,7 +137,6 @@ export const EditWalkerForm = ({ walker }) => {
             )
         })}
 
-        {/* button for submitting form */}
         <button type="button" 
             className="add-button"
             id="walker-save-button"
