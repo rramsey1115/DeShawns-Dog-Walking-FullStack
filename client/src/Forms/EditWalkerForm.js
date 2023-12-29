@@ -35,9 +35,7 @@ export const EditWalkerForm = ({ walker }) => {
 
         const {value, checked} = e.target
 
-       console.log('checked', checked)
         if (checked) {
-            console.log('if')
             setCheckedValues(pre => [...pre, value * 1])
         }
         else 
