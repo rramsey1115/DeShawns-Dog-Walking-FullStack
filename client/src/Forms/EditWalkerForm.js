@@ -5,7 +5,6 @@ import { editWalkerById, getAllCities } from "../apiManager"
 import "./EditWalker.css"
 
 export const EditWalkerForm = ({ walker }) => {
-    // console.log('walker', walker)
     const [allCities, setAllCities] = useState([]);
     const [checkedValues, setCheckedValues] = useState(walker.cities.map(wc => wc.id));
     const [updatedWalker, setUpdatedWalker] = useState({
@@ -24,13 +23,6 @@ export const EditWalkerForm = ({ walker }) => {
 
     useEffect(()=> {
         getAndSetAllCities()
-        // console.log('copy walker', {...walker})
-        // setUpdatedWalker({...walker})
-        // console.log('updatedWalker', updatedWalker);
-        // if (walker.id)
-        // {
-        //     setCheckedValues(walker.cities.map(wc => wc.id))
-        // } 
     }, []);
 
     useEffect(() => {
@@ -47,12 +39,9 @@ export const EditWalkerForm = ({ walker }) => {
         if (checked) {
             console.log('if')
             setCheckedValues(pre => [...pre, value * 1])
-            // updateWalkerCities();
         }
         else 
         {
-            // THIS IS THE PROBLEM I THINK
-            // console.log('value', value);
             setCheckedValues(pre => {
                 console.log('preELSE', pre)
                 console.log('valueELSE', value);
@@ -60,7 +49,6 @@ export const EditWalkerForm = ({ walker }) => {
                 console.log([...pre.filter(id => id !== value * 1)])
                 return [...pre.filter(id => id !== value * 1)]
             })
-            // updateWalkerCities();
         }
     }
 
@@ -78,7 +66,6 @@ export const EditWalkerForm = ({ walker }) => {
             const copy = { ...updatedWalker};
             console.log('res', res);
             copy.cities = [...res];
-            // console.log('copy',copy)
             setUpdatedWalker(copy);
     }
 
@@ -97,14 +84,8 @@ export const EditWalkerForm = ({ walker }) => {
         }
     }
 
-    // console.log('updatedWalker.cities', updatedWalker?.cities);
-    // console.log('cvs', checkedValues);
-
-  
-        // console.log('uwELSE', updatedWalker)
     return (
         <form className="walker-edit-form">
-        {/* {console.log('updatedWalker', updatedWalker)} */}
         <div className="form-div">
             <label>Name <br/>
                 <input required 

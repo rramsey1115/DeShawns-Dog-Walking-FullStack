@@ -300,10 +300,6 @@ app.MapDelete("/api/dogs/{id}", (int id) => {
 // add new dog -------------------
 app.MapPost("/api/dogs", (Dog newDogObj) => {
 
-    // create new unique Id for newDogObj
-    // SHOULD already have an Id from front end... we will see...
-    // newDogObj.Id = dogs.Max(o => o.Id) + 1;
-
     // find matching city object based on newDogObj.CityId
     City dogCity = cities.FirstOrDefault(city => city.Id == newDogObj.CityId);
 
